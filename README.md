@@ -1,0 +1,2 @@
+- Bookmarklet (display as a webcam) <br>
+  <a href="javascript:navigator.mediaDevices.getDisplayMedia({video:!0}).then(e=>{navigator.mediaDevices._getUserMedia||(navigator.mediaDevices._getUserMedia=navigator.mediaDevices.getUserMedia),navigator.mediaDevices.getUserMedia=function(i){return new Promise((a,t)=>{navigator.mediaDevices._getUserMedia(i).then(t=>{if(i.video&&e&&e.active){const i=t.getVideoTracks();i.length&&(t.removeTrack(i[0]),t.addTrack(e.getVideoTracks()[0]))}a(t)}).catch(e=>{t(e)})})}});">screen > webcam</a>
