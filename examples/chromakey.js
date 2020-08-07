@@ -83,8 +83,3 @@ function draw () {
 function windowResized () {
     resizeCanvas(windowWidth, windowHeight)
 }
-
-function mousePressed() {
-    let fs = fullscreen();
-    fullscreen(!fs);
-  }
