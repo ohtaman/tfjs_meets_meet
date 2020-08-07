@@ -17,7 +17,6 @@ function setup () {
         let detectHands = () => {
             if (webcam.loadedmetadata) {
                 model.estimateHands(webcam.elt).then((res) => {
-                    console.log(res)
                     hands = res
                     requestAnimationFrame(detectHands)
                 })
@@ -32,7 +31,7 @@ function setup () {
 function drawPointer(pointer) {
     noStroke()
     pointers.push(pointer)
-    if (pointer.length > 20) {
+    if (pointer.length > 10) {
         pointer.shift()
     }
 
@@ -41,7 +40,7 @@ function drawPointer(pointer) {
         const y = canvas.height*pointers[i][1]
         const size = abs(pointers[i][2])
 
-        fill(255 - (pointers.length - i)*10, 0, 0)
+        fill(255, 0, 0, 255 - (pointers.length - i)*25)
         ellipse(x, y, size, size)
     }
 }
@@ -93,13 +92,13 @@ function createDisplayCapture (constraints, callback) {
     const adjustVideoSize = () => {
         video.width = elem.width = elem.videoWidth
         video.height = elem.height = elem.videoHeight
-        video.loadedmetadata = true
         requestAnimationFrame(adjustVideoSize)
     }
 
     elem.addEventListener('loadedmetadata', () => {
         elem.play()
         adjustVideoSize()
+        video.loadedmetadata = true
         if (callback) callback(elem.srcObject)
     })
 

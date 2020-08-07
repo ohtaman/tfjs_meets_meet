@@ -20,12 +20,16 @@ function createDisplayCapture (constraints, callback) {
     p5.instance._elements.push(video)
     video.loadedmetadata = false
 
-    elem.addEventListener('loadedmetadata', () => {
-        elem.play()
+    const adjustVideoSize = () => {
         video.width = elem.width = elem.videoWidth
         video.height = elem.height = elem.videoHeight
-        video.loadedmetadata = true
+        requestAnimationFrame(adjustVideoSize)
+    }
 
+    elem.addEventListener('loadedmetadata', () => {
+        elem.play()
+        adjustVideoSize()
+        video.loadedmetadata = true
         if (callback) callback(elem.srcObject)
     })
 
