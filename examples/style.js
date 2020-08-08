@@ -17,7 +17,17 @@ function transfer(){
     style.transfer((err, img) => {
         background(0)
         resultImg.attribute('src', img.src)
-        image(resultImg, 0, 0, webcam.width, webcam.height)
+
+        if (canvas.height / canvas.width > webcam.height / webcam.width) {
+            width = canvas.width
+            height = webcam.height*canvas.width/webcam.width
+        } else {
+            width = webcam.width*canvas.height/webcam.height
+            height = canvas.height
+        }
+    
+
+        image(resultImg, int((canvas.width - width)/2), int((canvas.height - height)/2), width, height)
         
         requestAnimationFrame(transfer)
     })
